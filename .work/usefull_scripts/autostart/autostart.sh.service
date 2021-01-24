@@ -1,0 +1,9 @@
+[Service]
+Type=simple
+ExecStart=/home/tomten/.work/usefull_scripts/autostart
+
+[Unit]
+Description=Description=Runs autostart.sh script from ~/.work/usefull_scripts on boot after 20 seconds
+
+[Install]
+WantedBy=multi-user.target
