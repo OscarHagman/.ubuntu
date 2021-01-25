@@ -328,6 +328,8 @@ globalkeys = gears.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
+    -- KEY MAPPINGS
+
     -- Dmenu
     awful.key({ modkey },            "r",     function ()
     awful.util.spawn("dmenu_run") end,
@@ -338,6 +340,19 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" },            "w",     function ()
     awful.util.spawn("firefox") end,
        {description = "FireFox", group = "applications"}),
+
+    
+    -- FN KEYS
+
+    -- Fn key volume +
+    awful.key({ }, "#123", function () awful.util.spawn("amixer -D pulse sset Master 5%+") end), 
+    -- Fn key volume -
+    awful.key({ }, "#122", function () awful.util.spawn("amixer -D pulse sset Master 5%-") end),
+    -- Fn key screen brightness +
+    awful.key({ }, "#233", function () awful.util.spawn("xbacklight -inc 10") end),
+    -- Fn key screen brightness -
+    awful.key({ }, "#232", function () awful.util.spawn("xbacklight -dec 10") end),
+
 
 
     awful.key({ modkey }, "x",
@@ -522,6 +537,15 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
+
+    -- FIREFOX !MAXIMIZED && !FLOATING
+    { rule = { class = "Firefox" },
+      properties = { opacity = 1, maximized = false, floating = false } },
+
+    -- VSCODE
+    { rule = { class = "Code" },
+      properties = { opacity = 0.9 } },
+
 }
 -- }}}
 
@@ -596,6 +620,8 @@ awful.spawn.with_shell("nitrogen --restore")
 
 -- Change border color
 client.connect_signal("focus", function(c) c.border_color = "#500070" end)
+
+
 
 
 -- TEMPLATE #launch with keybinding
